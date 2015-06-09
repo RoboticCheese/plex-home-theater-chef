@@ -10,65 +10,64 @@ Plex Home Theater Cookbook
 [codeclimate]: https://codeclimate.com/github/RoboticCheese/plex-home-theater-chef
 [coveralls]: https://coveralls.io/r/RoboticCheese/plex-home-theater-chef
 
-TODO: Enter the cookbook description here.
+A Chef cookbook for installing Plex Home Theater.
 
 Requirements
 ============
 
-TODO: Describe cookbook dependencies.
+This cookbook currently supports OS X only. Windows (and maybe Linux?) support
+is coming eventually.
 
 Usage
 =====
 
-TODO: Describe how to use the cookbook.
+Either add the default recipe to your run_list or implement the resource
+directly in a recipe of your own.
 
 Recipes
 =======
 
 ***default***
 
-TODO: Describe each component recipe.
+Installs Plex Home Theater.
 
-Attributes
-==========
-
-***default***
-
-TODO: Describe any noteworthy attributes.
 
 Resources
 =========
 
-***plex_home_theater***
+***plex_home_theater_app***
 
-TODO: Describe each included resource.
+Used to install or remove the Plex Home Theater app.
 
 Syntax:
 
-    plex_home_theater 'my_resource' do
-        attribute1 'value1'
-        action :create
+    plex_home_theater_app 'default' do
+        action :install
     end
 
 Actions:
 
-| Action  | Description  |
-|---------|--------------|
-| action1 | Do something |
+| Action     | Description       |
+|------------|-------------------|
+| `:install` | Install the app   |
+| `:remove`  | Uninstall the app |
 
 Attributes:
 
-| Attribute  | Default        | Description          |
-|------------|----------------|----------------------|
-| attribute1 | `'some_value'` | Do something         |
-| action     | `:create`      | Action(s) to perform |
+| Attribute  | Default    | Description          |
+|------------|------------|----------------------|
+| action     | `:install` | Action(s) to perform |
 
 Providers
 =========
 
-TODO: Describe each included provider
+***Chef::Provider::PlexHomeTheaterApp::MacOsX***
 
-***Chef::Provider::SomeProvider***
+Provider for Mac OS X platforms.
+
+***Chef::Provider::PlexHomeTheaterApp***
+
+A parent provider for all the platform-specific providers to subclass.
 
 Contributing
 ============
