@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Recipe:: default
+# Library:: resource_plex_home_theater_app
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,6 +18,25 @@
 # limitations under the License.
 #
 
-plex_home_theater_app 'default' do
-  action :install
+require 'chef/resource/lwrp_base'
+
+class Chef
+  class Resource
+    # A Chef resource for the Plex Home Theater app.
+    #
+    # @author Jonathan Hartman <j@p4nt5.com>
+    class PlexHomeTheaterApp < Resource::LWRPBase
+      self.resource_name = :plex_home_theater_app
+      actions :install, :remove
+      default_action :install
+
+      #
+      # Attribute for the app's installed status.
+      #
+      attribute :installed,
+                kind_of: [NilClass, TrueClass, FalseClass],
+                default: nil
+      alias_method :installed?, :installed
+    end
+  end
 end

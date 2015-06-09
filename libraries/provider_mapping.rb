@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Recipe:: default
+# Library:: provider_mapping
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,6 +18,10 @@
 # limitations under the License.
 #
 
-plex_home_theater_app 'default' do
-  action :install
-end
+require 'chef/dsl'
+require 'chef/platform/provider_mapping'
+require_relative 'provider_plex_home_theater_app'
+
+Chef::Platform.set(platform: :mac_os_x,
+                   resource: :plex_home_theater_app,
+                   provider: Chef::Provider::PlexHomeTheaterApp::MacOsX)
