@@ -27,7 +27,7 @@ class Chef
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterApp < Resource::LWRPBase
       self.resource_name = :plex_home_theater_app
-      actions :install, :remove
+      actions :install, :remove, :enable, :start
       default_action :install
 
       #
@@ -37,6 +37,22 @@ class Chef
                 kind_of: [NilClass, TrueClass, FalseClass],
                 default: nil
       alias_method :installed?, :installed
+
+      #
+      # Attribute for the app's enabled status.
+      #
+      attribute :enabled,
+                kind_of: [NilClass, TrueClass, FalseClass],
+                default: nil
+      alias_method :enabled?, :enabled
+
+      #
+      # Attribute for the app's running status.
+      #
+      attribute :running,
+                kind_of: [NilClass, TrueClass, FalseClass],
+                default: nil
+      alias_method :running?, :running
     end
   end
 end

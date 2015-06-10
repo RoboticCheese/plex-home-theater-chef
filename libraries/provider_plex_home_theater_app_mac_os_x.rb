@@ -35,6 +35,51 @@ class Chef
         private
 
         #
+        # (see PlexHomeTheaterApp#enable!)
+        #
+        def enable!
+          # TODO: This should eventually take the form of applescript and
+          # login_item resources in the mac_os_x cookbook.
+          cmd = "osascript -e 'tell application \"System Events\" to make " \
+                'new login item at end with properties ' \
+                "{name: \"Plex Home Theater\", path: \"#{PATH}\", " \
+                "hidden: false}'"
+          enabled_status = enabled?
+          execute 'enable Plex Home Theater' do
+            command cmd
+            action :run
+            only_if { !enabled_status }
+          end
+        end
+
+        #
+        # (see PlexHomeTheaterApp#start!)
+        #
+        def start!
+          execute 'start Plex Home Theater' do
+            command "open '#{PATH}'"
+            user Etc.getlogin
+            action :run
+            only_if do
+              cmd = 'ps -A -c -o command | grep ^Plex Home Theater$'
+              Mixlib::ShellOut.new(cmd).run_command.stdout.empty?
+            end
+          end
+        end
+
+        #
+        # Shell out and use AppleScript to check whether the login item
+        # already exists.
+        #
+        # @return [TrueClass, FalseClass]
+        #
+        def enabled?
+          cmd = "osascript -e 'tell application \"System Events\" to get " \
+                "the name of the login item \"Plex Home Theater\"'"
+          !Mixlib::ShellOut.new(cmd).run_command.stdout.empty?
+        end
+
+        #
         # Use a dmg_package resource to download and install the package. The
         # dmg_resource creates an inline remote_file, so this is all that's
         # needed.
