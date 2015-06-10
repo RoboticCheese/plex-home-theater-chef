@@ -17,6 +17,9 @@ suites:
     run_list:
       - recipe[plex-home-theater]
     attributes:
+  - name: enable_and_start
+    run_list:
+      - recipe[plex-home-theater_test::enable_and_start]
   - name: uninstall
     run_list:
       - recipe[plex-home-theater_test::uninstall]

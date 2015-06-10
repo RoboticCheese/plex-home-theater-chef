@@ -40,6 +40,23 @@ class Chef
       end
 
       #
+      # Enable the app if it's not already and set its enabled status to true.
+      #
+      action :enable do
+        enable!
+        new_resource.enabled(true)
+      end
+
+      #
+      # Start the app if it's not already running and set its running status
+      # to true.
+      #
+      action :start do
+        start!
+        new_resource.running(true)
+      end
+
+      #
       # Install the app if it's not already and set the new_resource installed
       # status to true.
       #
@@ -58,6 +75,26 @@ class Chef
       end
 
       private
+
+      #
+      # Do the actual app enabling.
+      #
+      # @raise [NotImplementedError] if not defined for this provider.
+      #
+      def enable!
+        fail(NotImplementedError,
+             "`enable!` method not implemented for #{self.class} provider")
+      end
+
+      #
+      # Do the actual app starting.
+      #
+      # @raise [NotImplementedError] if not defined for this provider.
+      #
+      def start!
+        fail(NotImplementedError,
+             "`start!` method not implemented for #{self.class} provider")
+      end
 
       #
       # Do the actual app installation.

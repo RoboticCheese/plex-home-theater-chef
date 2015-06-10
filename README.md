@@ -47,10 +47,12 @@ Syntax:
 
 Actions:
 
-| Action     | Description       |
-|------------|-------------------|
-| `:install` | Install the app   |
-| `:remove`  | Uninstall the app |
+| Action     | Description                   |
+|------------|-------------------------------|
+| `:install` | Install the app               |
+| `:remove`  | Uninstall the app             |
+| `:enable`  | Set the app to start on login |
+| `:start`   | Start the app                 |
 
 Attributes:
 
