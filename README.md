@@ -15,8 +15,7 @@ A Chef cookbook for installing Plex Home Theater.
 Requirements
 ============
 
-This cookbook currently supports OS X only. Windows (and maybe Linux?) support
-is coming eventually.
+This cookbook currently requires either OS X or Windows.
 
 Usage
 =====
@@ -66,6 +65,10 @@ Providers
 ***Chef::Provider::PlexHomeTheaterApp::MacOsX***
 
 Provider for Mac OS X platforms.
+
+***Chef::Provider::PlexHomeTheaterApp::Windows***
+
+Provider for Windows platforms.
 
 ***Chef::Provider::PlexHomeTheaterApp***
 

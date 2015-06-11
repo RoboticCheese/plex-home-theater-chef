@@ -25,3 +25,6 @@ require_relative 'provider_plex_home_theater_app'
 Chef::Platform.set(platform: :mac_os_x,
                    resource: :plex_home_theater_app,
                    provider: Chef::Provider::PlexHomeTheaterApp::MacOsX)
+Chef::Platform.set(platform: :windows,
+                   resource: :plex_home_theater_app,
+                   provider: Chef::Provider::PlexHomeTheaterApp::Windows)
