@@ -9,4 +9,10 @@ describe 'plex-home-theater::app' do
       expect(subject).not_to be_directory
     end
   end
+
+  describe package('Plex Home Theater'), if: os[:family] == 'windows' do
+    it 'is not installed' do
+      expect(subject).not_to be_installed
+    end
+  end
 end

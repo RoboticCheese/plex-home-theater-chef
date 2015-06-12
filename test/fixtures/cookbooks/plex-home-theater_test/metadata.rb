@@ -12,4 +12,5 @@ version          '0.0.1'
 depends          'plex-home-theater'
 
 supports         'mac_os_x'
+supports         'windows'
 # rubocop:enable SingleSpaceBeforeFirstArg

@@ -9,5 +9,8 @@ description      'Installs the Plex Home Theater app'
 long_description 'Installs the Plex Home Theater app'
 version          '0.0.1'
 
+depends          'windows', '~> 1.37'
+
 supports         'mac_os_x'
+supports         'windows'
 # rubocop:enable SingleSpaceBeforeFirstArg
