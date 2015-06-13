@@ -49,6 +49,15 @@ class Chef
       end
 
       #
+      # Disable the app if it's not already and set its enabled status to
+      # false.
+      #
+      action :disable do
+        disable!
+        new_resource.enabled(false)
+      end
+
+      #
       # Start the app if it's not already running and set its running status
       # to true.
       #
@@ -85,6 +94,16 @@ class Chef
       def enable!
         fail(NotImplementedError,
              "`enable!` method not implemented for #{self.class} provider")
+      end
+
+      #
+      # Do the actual app disabling.
+      #
+      # @raise [NotImplementedError] if not defined for this provider.
+      #
+      def disable!
+        fail(NotImplementedError,
+             "`disable!` method not implemented for #{self.class} provider")
       end
 
       #

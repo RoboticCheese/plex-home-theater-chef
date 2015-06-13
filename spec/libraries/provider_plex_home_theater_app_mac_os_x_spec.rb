@@ -41,6 +41,21 @@ describe Chef::Provider::PlexHomeTheaterApp::MacOsX do
     end
   end
 
+  describe '#disable!' do
+    it 'uses an execute resource to delete the login item' do
+      p = provider
+      expect(p).to receive(:execute).with('disable Plex Home Theater')
+        .and_yield
+      cmd = 'osascript -e \'tell application "System Events" to delete ' \
+        'login item "Plex Home Theater"\''
+      expect(p).to receive(:command).with(cmd)
+      expect(p).to receive(:action).with(:run)
+      expect(p).to receive(:only_if).and_yield
+      expect(p).to receive(:enabled?)
+      p.send(:disable!)
+    end
+  end
+
   describe '#enabled?' do
     let(:enabled?) { nil }
     let(:stdout) { enabled? ? 'Plex Home Theater' : '' }

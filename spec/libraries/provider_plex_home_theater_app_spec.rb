@@ -31,6 +31,23 @@ describe Chef::Provider::PlexHomeTheaterApp do
     end
   end
 
+  describe '#action_disable' do
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:disable!)
+    end
+
+    it 'calls the child `disable!` method ' do
+      expect_any_instance_of(described_class).to receive(:disable!)
+      provider.action_disable
+    end
+
+    it 'sets the resource enabled status' do
+      p = provider
+      p.action_disable
+      expect(p.new_resource.enabled?).to eq(false)
+    end
+  end
+
   describe '#action_start' do
     before(:each) do
       allow_any_instance_of(described_class).to receive(:start!)
@@ -82,7 +99,7 @@ describe Chef::Provider::PlexHomeTheaterApp do
     end
   end
 
-  [:install!, :remove!, :start!, :enable!].each do |a|
+  [:install!, :remove!, :start!, :enable!, :disable!].each do |a|
     describe "##{a}" do
       it 'raises an error' do
         expect { provider.send(a) }.to raise_error(NotImplementedError)

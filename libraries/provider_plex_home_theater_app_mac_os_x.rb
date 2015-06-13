@@ -53,6 +53,20 @@ class Chef
         end
 
         #
+        # (see PlexHomeTheaterApp#disable!)
+        #
+        def disable!
+          cmd = 'osascript -e \'tell application "System Events" to delete ' \
+                'login item "Plex Home Theater"\''
+          enabled_status = enabled?
+          execute 'disable Plex Home Theater' do
+            command cmd
+            action :run
+            only_if { enabled_status }
+          end
+        end
+
+        #
         # (see PlexHomeTheaterApp#start!)
         #
         def start!

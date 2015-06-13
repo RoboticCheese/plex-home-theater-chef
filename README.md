@@ -46,12 +46,13 @@ Syntax:
 
 Actions:
 
-| Action     | Description                   |
-|------------|-------------------------------|
-| `:install` | Install the app               |
-| `:remove`  | Uninstall the app             |
-| `:enable`  | Set the app to start on login |
-| `:start`   | Start the app                 |
+| Action     | Description                       |
+|------------|-----------------------------------|
+| `:install` | Install the app                   |
+| `:remove`  | Uninstall the app                 |
+| `:enable`  | Set the app to start on login     |
+| `:disable` | Set the app to not start on login |
+| `:start`   | Start the app                     |
 
 Attributes:
 
