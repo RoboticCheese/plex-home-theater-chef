@@ -45,6 +45,15 @@ class Chef
         end
 
         #
+        # (see PlexHomeTheater#disable!)
+        #
+        def disable!
+          windows_auto_run 'Plex Home Theater' do
+            action :remove
+          end
+        end
+
+        #
         # (see PlexHomeTheaterApp#start!)
         #
         def start!

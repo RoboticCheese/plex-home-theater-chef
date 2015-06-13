@@ -27,7 +27,7 @@ class Chef
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterApp < Resource::LWRPBase
       self.resource_name = :plex_home_theater_app
-      actions :install, :remove, :enable, :start
+      actions :install, :remove, :enable, :disable, :start
       default_action :install
 
       #

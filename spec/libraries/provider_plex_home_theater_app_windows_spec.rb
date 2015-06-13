@@ -34,6 +34,16 @@ describe Chef::Provider::PlexHomeTheaterApp::Windows do
     end
   end
 
+  describe '#disable!' do
+    it 'uses a windows_auto_run resource to disable Plex' do
+      p = provider
+      expect(p).to receive(:windows_auto_run).with('Plex Home Theater')
+        .and_yield
+      expect(p).to receive(:action).with(:remove)
+      p.send(:disable!)
+    end
+  end
+
   describe '#start!' do
     it 'uses a powershell_script to start the app' do
       p = provider

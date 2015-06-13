@@ -14,7 +14,7 @@ describe Chef::Resource::PlexHomeTheaterApp do
     end
 
     it 'sets the correct supported actions' do
-      expected = [:nothing, :install, :remove, :enable, :start]
+      expected = [:nothing, :install, :remove, :enable, :disable, :start]
       expect(resource.instance_variable_get(:@allowed_actions)).to eq(expected)
     end
 
