@@ -10,7 +10,7 @@ describe Chef::Resource::PlexHomeTheaterApp do
   describe '#initialize' do
     it 'sets the correct resource name' do
       exp = :plex_home_theater_app
-      expect(resource.instance_variable_get(:@resource_name)).to eq(exp)
+      expect(resource.resource_name).to eq(exp)
     end
 
     it 'sets the correct supported actions' do
