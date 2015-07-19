@@ -22,6 +22,20 @@ describe Chef::Provider::PlexHomeTheaterApp::Windows do
     end
   end
 
+  describe '.provides?' do
+    let(:platform) { nil }
+    let(:node) { ChefSpec::Macros.stub_node('node.example', platform) }
+    let(:res) { described_class.provides?(node, new_resource) }
+
+    context 'Windows' do
+      let(:platform) { { platform: 'windows', version: '2012R2' } }
+
+      it 'returns true' do
+        expect(res).to eq(true)
+      end
+    end
+  end
+
   describe '#enable!' do
     it 'uses a windows_auto_run resource to enable Plex' do
       p = provider

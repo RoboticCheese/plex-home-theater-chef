@@ -32,6 +32,8 @@ class Chef
         URL ||= 'https://plex.tv/downloads'
         PATH ||= ::File.expand_path('/Program Files (x86)/Plex Home Theater')
 
+        provides :plex_home_theater_app, platform_family: 'windows'
+
         private
 
         #
