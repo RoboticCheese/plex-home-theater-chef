@@ -15,23 +15,23 @@ describe Chef::Resource::PlexHomeTheaterApp do
 
     it 'sets the correct supported actions' do
       expected = [:nothing, :install, :remove, :enable, :disable, :start]
-      expect(resource.instance_variable_get(:@allowed_actions)).to eq(expected)
+      expect(resource.allowed_actions).to eq(expected)
     end
 
     it 'sets the correct default action' do
-      expect(resource.instance_variable_get(:@action)).to eq(:install)
+      expect(resource.action).to eq([:install])
     end
 
     it 'sets the installed status to nil' do
-      expect(resource.instance_variable_get(:@installed)).to eq(nil)
+      expect(resource.installed).to eq(nil)
     end
 
     it 'sets the enabled status to nil' do
-      expect(resource.instance_variable_get(:@enabled)).to eq(nil)
+      expect(resource.enabled).to eq(nil)
     end
 
     it 'sets the running status to nil' do
-      expect(resource.instance_variable_get(:@running)).to eq(nil)
+      expect(resource.running).to eq(nil)
     end
   end
 

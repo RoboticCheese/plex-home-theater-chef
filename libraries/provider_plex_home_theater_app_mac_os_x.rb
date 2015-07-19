@@ -32,6 +32,8 @@ class Chef
         URL ||= 'https://plex.tv/downloads'
         PATH ||= '/Applications/Plex Home Theater.app'
 
+        provides :plex_home_theater_app, platform_family: 'mac_os_x'
+
         private
 
         #
