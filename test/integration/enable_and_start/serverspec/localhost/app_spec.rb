@@ -19,7 +19,7 @@ describe 'plex-home-theater::app' do
   describe command(
     'osascript -e \'tell application "System Events" to get the name of the ' \
     'login item "Plex Home Theater"\''
-  ), if: os[:family] == 'darwin'  do
+  ), if: os[:family] == 'darwin' do
     it 'indicates Plex Home Theater is enabled' do
       expect(subject.stdout.strip).to eq('Plex Home Theater')
     end
