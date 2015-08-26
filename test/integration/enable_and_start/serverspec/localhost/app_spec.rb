@@ -33,13 +33,9 @@ describe 'plex-home-theater::app' do
     end
   end
 
-  # TODO: Using process('Plex Home Theater') requires a fix for Specinfra to
-  # not try to use `ps -C` in OS X.
-  describe command(
-    'ps -A -c -o command | grep Plex\ Home\ Theater'
-  ), if: os[:family] == 'darwin' do
+  describe process('Plex Home Theater'), if: os[:family] == 'darwin' do
     it 'is running' do
-      expect(subject.stdout.strip).to eq('Plex Home Theater')
+      expect(subject).to be_running
     end
   end
 
