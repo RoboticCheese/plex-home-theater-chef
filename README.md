@@ -1,12 +1,14 @@
 Plex Home Theater Cookbook
 ==========================
 [![Cookbook Version](https://img.shields.io/cookbook/v/plex-home-theater.svg)][cookbook]
-[![Build Status](https://img.shields.io/travis/RoboticCheese/plex-home-theater-chef.svg)][travis]
+[![OS X Build Status](https://img.shields.io/travis/RoboticCheese/plex-home-theater-chef.svg)][travis]
+[![Windows Build Status](https://img.shields.io/appveyor/ci/RoboticCheese/plex-home-theater-chef.svg)][appveyor]
 [![Code Climate](https://img.shields.io/codeclimate/github/RoboticCheese/plex-home-theater-chef.svg)][codeclimate]
 [![Coverage Status](https://img.shields.io/coveralls/RoboticCheese/plex-home-theater-chef.svg)][coveralls]
 
 [cookbook]: https://supermarket.chef.io/cookbooks/plex-home-theater
 [travis]: https://travis-ci.org/RoboticCheese/plex-home-theater-chef
+[appveyor]: https://ci.appveyor.com/project/RoboticCheese/plex-home-theater-chef
 [codeclimate]: https://codeclimate.com/github/RoboticCheese/plex-home-theater-chef
 [coveralls]: https://coveralls.io/r/RoboticCheese/plex-home-theater-chef
 

@@ -19,7 +19,7 @@ describe 'plex-home-theater::app' do
   describe command(
     'osascript -e \'tell application "System Events" to get the name of the ' \
     'login item "Plex Home Theater"\''
-  ), if: os[:family] == 'darwin'  do
+  ), if: os[:family] == 'darwin' do
     it 'indicates Plex Home Theater is enabled' do
       expect(subject.stdout.strip).to eq('Plex Home Theater')
     end
@@ -33,9 +33,13 @@ describe 'plex-home-theater::app' do
     end
   end
 
-  describe process('Plex Home Theater'), if: os[:family] == 'darwin' do
+  # TODO: Using process('Plex Home Theater') requires a fix for Specinfra to
+  # not try to use `ps -C` in OS X.
+  describe command(
+    'ps -A -c -o command | grep Plex\ Home\ Theater'
+  ), if: os[:family] == 'darwin' do
     it 'is running' do
-      expect(subject).to be_running
+      expect(subject.stdout.strip).to eq('Plex Home Theater')
     end
   end
 
