@@ -23,6 +23,10 @@ suites:
   - name: enable_and_start
     run_list:
       - recipe[plex-home-theater_test::enable_and_start]
+    attributes:
+    excludes:
+      - macosx-travis
   - name: uninstall
     run_list:
       - recipe[plex-home-theater_test::uninstall]
+    attributes:
