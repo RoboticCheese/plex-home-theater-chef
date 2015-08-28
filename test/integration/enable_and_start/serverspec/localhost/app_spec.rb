@@ -25,11 +25,11 @@ describe 'plex-home-theater::app' do
     end
   end
 
-  describe command(
-    'Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"'
+  describe windows_registry_key(
+    'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run'
   ), if: os[:family] == 'windows' do
     it 'indicates Plex Home Theater is enabled' do
-      expect(subject.stdout).to match(/^Plex Home Theater/)
+      expect(subject).to have_property('Plex Home Theater')
     end
   end
 
