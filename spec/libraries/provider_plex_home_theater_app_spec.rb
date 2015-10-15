@@ -5,8 +5,11 @@ require_relative '../../libraries/provider_plex_home_theater_app'
 
 describe Chef::Provider::PlexHomeTheaterApp do
   let(:name) { 'default' }
-  let(:new_resource) { Chef::Resource::PlexHomeTheaterApp.new(name, nil) }
-  let(:provider) { described_class.new(new_resource, nil) }
+  let(:run_context) { ChefSpec::SoloRunner.new.converge.run_context }
+  let(:new_resource) do
+    Chef::Resource::PlexHomeTheaterApp.new(name, run_context)
+  end
+  let(:provider) { described_class.new(new_resource, run_context) }
 
   describe '#whyrun_supported?' do
     it 'returns true' do
