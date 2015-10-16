@@ -38,6 +38,6 @@ group :deploy do
 end
 
 group :production do
-  gem 'chef', '>= 11'
+  gem 'chef', '>= 12.5'
   gem 'berkshelf', '>= 3'
 end
