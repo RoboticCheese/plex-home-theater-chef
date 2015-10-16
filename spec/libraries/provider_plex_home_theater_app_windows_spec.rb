@@ -5,8 +5,11 @@ require_relative '../../libraries/provider_plex_home_theater_app_windows'
 
 describe Chef::Provider::PlexHomeTheaterApp::Windows do
   let(:name) { 'default' }
-  let(:new_resource) { Chef::Resource::PlexHomeTheaterApp.new(name, nil) }
-  let(:provider) { described_class.new(new_resource, nil) }
+  let(:run_context) { ChefSpec::SoloRunner.new.converge.run_context }
+  let(:new_resource) do
+    Chef::Resource::PlexHomeTheaterApp.new(name, run_context)
+  end
+  let(:provider) { described_class.new(new_resource, run_context) }
 
   describe 'URL' do
     it 'returns the download page URL' do
@@ -147,8 +150,9 @@ describe Chef::Provider::PlexHomeTheaterApp::Windows do
     end
 
     it 'returns a cache path' do
+      res = provider.send(:download_path)
       expected = "#{Chef::Config[:file_cache_path]}/plex.exe"
-      expect(provider.send(:download_path)).to eq(expected)
+      expect(res).to eq(expected)
     end
   end
 
