@@ -3,7 +3,7 @@ Plex Home Theater Cookbook CHANGELOG
 
 v?.?.? (????-??-??)
 -------------------
-- Switch to Chef 12-style provider resolution
+- Convert to Chef 12.5 custom resources
 
 v0.1.0 (2015-06-29)
 -------------------

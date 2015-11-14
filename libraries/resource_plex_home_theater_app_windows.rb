@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Resource:: plex_home_theater_app_windows
+# Library:: plex_home_theater_app_windows
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -19,7 +19,7 @@
 #
 
 require 'net/http'
-require_relative 'plex_home_theater_app'
+require_relative 'resource_plex_home_theater_app'
 
 class Chef
   class Resource
@@ -27,11 +27,10 @@ class Chef
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterAppWindows < PlexHomeTheaterApp
-      URL = 'https://plex.tv/downloads'
-      PATH = ::File.expand_path('/Program Files (x86)/Plex Home Theater')
+      URL ||= 'https://plex.tv/downloads'
+      PATH ||= ::File.expand_path('/Program Files (x86)/Plex Home Theater')
 
       provides :plex_home_theater_app, platform_family: 'windows'
-
 
       #
       # Download the app from the remote server and then install it.
@@ -40,7 +39,7 @@ class Chef
       #
       action :install do
         remote_file download_path do
-          source s
+          source source_path
           action :create
           only_if { !::File.exist?(PATH) }
         end
@@ -60,8 +59,6 @@ class Chef
         end
       end
 
-      private
-
       #
       # Construct a local path to download the package file to.
       #
@@ -69,7 +66,7 @@ class Chef
       #
       def download_path
         ::File.join(Chef::Config[:file_cache_path],
-                    ::File.basename(remote_path))
+                    ::File.basename(source_path))
       end
 
       #
@@ -78,8 +75,8 @@ class Chef
       #
       # @return [String] the URL of the OS X .zip package
       #
-      def remote_path
-        @remote_path ||= begin
+      def source_path
+        @source_path ||= begin
           u = URI.parse(URL)
           opts = { use_ssl: u.scheme == 'https',
                    ca_file: Chef::Config[:ssl_ca_file] }

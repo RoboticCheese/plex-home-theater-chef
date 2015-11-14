@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Library:: matchers
+# Attributes:: default
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,22 +18,4 @@
 # limitations under the License.
 #
 
-if defined?(ChefSpec)
-  %w(
-    plex_home_theater plex_home_theater_app plex_home_theater_service
-  ).each do |matcher|
-    ChefSpec.define_matcher(matcher)
-  end
-
-  {
-    plex_home_theater: %i(nothing create remove),
-    plex_home_theater_app: %i(nothing install remove),
-    plex_home_theater_service: %i(nothing enable disable start stop)
-  }.each do |resource, actions|
-    actions.each do |action|
-      define_method("#{action}_#{resource}") do |name|
-        ChefSpec::Matchers::ResourceMatcher.new(resource, action, name)
-      end
-    end
-  end
-end
+default['plex_home_theater']['app']['source'] = nil

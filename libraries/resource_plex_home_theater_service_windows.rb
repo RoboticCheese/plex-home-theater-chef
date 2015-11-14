@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Resource:: plex_home_theater_service_windows
+# Library:: plex_home_theater_service_windows
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -19,7 +19,8 @@
 #
 
 require 'net/http'
-require_relative 'plex_home_theater_service'
+require_relative 'resource_plex_home_theater_app_windows'
+require_relative 'resource_plex_home_theater_service'
 
 class Chef
   class Resource
@@ -27,6 +28,8 @@ class Chef
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterServiceWindows < PlexHomeTheaterService
+      PATH ||= PlexHomeTheaterAppWindows::PATH
+
       provides :plex_home_theater_service, platform_family: 'windows'
 
       #
@@ -52,7 +55,7 @@ class Chef
       # Use PowerShell's 'Start-Process' command to run Plex.
       #
       action :start do
-        powershell_script 'start Plex Home Theater' do
+        powershell_script 'Start Plex Home Theater' do
           code "Start-Process \"#{PATH}/Plex Home Theater.exe\""
           action :run
           only_if do

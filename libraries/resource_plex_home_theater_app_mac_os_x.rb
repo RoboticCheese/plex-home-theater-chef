@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Resource:: plex_home_theater_app_mac_os_x
+# Library:: plex_home_theater_app_mac_os_x
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -19,7 +19,7 @@
 #
 
 require 'net/http'
-require_relative 'plex_home_theater_app'
+require_relative 'resource_plex_home_theater_app'
 
 class Chef
   class Resource
@@ -27,8 +27,8 @@ class Chef
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterAppMacOsX < PlexHomeTheaterApp
-      URL = 'https://plex.tv/downloads'
-      PATH = '/Applications/Plex Home Theater.app'
+      URL ||= 'https://plex.tv/downloads'
+      PATH ||= '/Applications/Plex Home Theater.app'
 
       provides :plex_home_theater_app, platform_family: 'mac_os_x'
 
@@ -38,13 +38,12 @@ class Chef
       # won't do the job here.
       #
       action :install do
-        remote_file remote_path do
-          source s
+        remote_file download_path do
+          source source_path
           action :create
           only_if { !::File.exist?(PATH) }
         end
-        execute 'unzip Plex Home Theater app' do
-          command "unzip -d /Applications #{download_path}"
+        execute "unzip -d /Applications #{download_path}" do
           action :run
           creates PATH
         end
@@ -69,8 +68,6 @@ class Chef
         end
       end
 
-      private
-
       #
       # Construct a local path to download the package file to.
       #
@@ -78,7 +75,7 @@ class Chef
       #
       def download_path
         ::File.join(Chef::Config[:file_cache_path],
-                    ::File.basename(remote_path))
+                    ::File.basename(source_path))
       end
 
       #
@@ -87,8 +84,8 @@ class Chef
       #
       # @return [String] the URL of the OS X .zip package
       #
-      def remote_path
-        @remote_path ||= begin
+      def source_path
+        @source_path ||= begin
           u = URI.parse(URL)
           opts = { use_ssl: u.scheme == 'https',
                    ca_file: Chef::Config[:ssl_ca_file] }

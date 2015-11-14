@@ -6,7 +6,7 @@ describe 'plex-home-theater::default' do
   let(:runner) { ChefSpec::SoloRunner.new }
   let(:chef_run) { runner.converge(described_recipe) }
 
-  it 'installs the Plex Home Theater app' do
-    expect(chef_run).to install_plex_home_theater_app('default')
+  it 'installs Plex Home Theater' do
+    expect(chef_run).to create_plex_home_theater('default')
   end
 end

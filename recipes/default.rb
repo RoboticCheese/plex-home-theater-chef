@@ -18,6 +18,6 @@
 # limitations under the License.
 #
 
-plex_home_theater_app 'default' do
-  action :install
+plex_home_theater 'default' do
+  source node['plex_home_theater']['app']['source']
 end

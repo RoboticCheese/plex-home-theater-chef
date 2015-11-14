@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: plex-home-theater
-# Resource:: plex_home_theater
+# Library:: plex_home_theater_app
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -22,22 +22,19 @@ require 'chef/resource'
 
 class Chef
   class Resource
-    # A custom resource that wraps each Plex Home Theater subresource.
+    # A parent custom resource for Plex Home Theater App.
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterApp < Resource
       property :source, [String, nil], default: nil
 
-      default_action :create
+      default_action :install
 
-      action :create do
-        plex_home_theater_app(name) { source source }
-        plex_home_theater_service name
-      end
-
-      action :remove do
-        plex_home_theater_service(name) { action [:stop, :disable] }
-        plex_home_theater_app(name) { action :remove }
+      %i(install remove).each do |a|
+        action a do
+          fail(NotImplementedError,
+               "Action '#{a}' must be implemented for '#{self.class}' resource")
+        end
       end
     end
   end
