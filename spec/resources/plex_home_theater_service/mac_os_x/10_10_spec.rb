@@ -8,12 +8,13 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
                              platform: 'mac_os_x',
                              version: '10.10')
   end
-  let(:chef_run) do
+  let(:converge) do
     runner.converge("plex_home_theater_service_test::#{action}")
   end
 
   context 'the default action (:nothing)' do
     let(:action) { :default }
+    cached(:chef_run) { converge }
 
     it 'does nothing with the service' do
       [
@@ -33,6 +34,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
     let(:shell_out) do
       double(run_command: double(stdout: enabled? ? 'stuff' : ''))
     end
+    cached(:chef_run) { converge }
 
     before(:each) do
       cmd = 'osascript -e \'tell application "System Events" to get the ' \
@@ -55,6 +57,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
 
     context 'already enabled' do
       let(:enabled?) { true }
+      cached(:chef_run) { converge }
 
       it 'does not try to enable Plex Home Theater again' do
         expect(chef_run).to_not run_execute('Enable Plex Home Theater')
@@ -77,6 +80,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
 
     context 'already enabled' do
       let(:enabled?) { true }
+      cached(:chef_run) { converge }
 
       it 'disables Plex Home Theater' do
         expected = 'osascript -e \'tell application "System Events" to ' \
@@ -88,6 +92,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
 
     context 'not already enabled' do
       let(:enabled?) { false }
+      cached(:chef_run) { converge }
 
       it 'does not try to disable Plex Home Theater again' do
         expect(chef_run).to_not run_execute('Disable Plex Home Theater')
@@ -109,6 +114,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
 
     context 'not already running' do
       let(:running?) { false }
+      cached(:chef_run) { converge }
 
       it 'starts Plex Home Theater' do
         expect(chef_run).to run_execute('Start Plex Home Theater')
@@ -119,6 +125,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
 
     context 'already running' do
       let(:running?) { true }
+      cached(:chef_run) { converge }
 
       it 'does not start Plex Home Theater' do
         expect(chef_run).to_not run_execute('Start Plex Home Theater')
@@ -128,6 +135,7 @@ describe 'resource_plex_home_theater_service::mac_os_x::10_10' do
 
   context 'the :stop action' do
     let(:action) { :stop }
+    cached(:chef_run) { converge }
 
     it 'stops Plex Home Theater' do
       expect(chef_run).to run_execute('Stop Plex Home Theater')

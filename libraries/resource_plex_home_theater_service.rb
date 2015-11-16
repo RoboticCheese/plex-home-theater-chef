@@ -26,14 +26,14 @@ class Chef
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterService < Resource
-      default_action :nothing
-
       %i(enable disable start stop).each do |a|
         action a do
           fail(NotImplementedError,
                "Action '#{a}' must be implemented for '#{self.class}' resource")
         end
       end
+
+      default_action :nothing
     end
   end
 end

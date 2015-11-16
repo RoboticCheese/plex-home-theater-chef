@@ -85,7 +85,7 @@ class Chef
       # @return [String] the URL of the OS X .zip package
       #
       def source_path
-        @source_path ||= begin
+        @source_path ||= source || begin
           u = URI.parse(URL)
           opts = { use_ssl: u.scheme == 'https',
                    ca_file: Chef::Config[:ssl_ca_file] }

@@ -68,6 +68,8 @@ class Chef
       end
 
       # TODO: action :stop do...
+
+      default_action :nothing
     end
   end
 end

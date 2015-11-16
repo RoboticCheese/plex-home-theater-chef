@@ -91,6 +91,8 @@ class Chef
         end
       end
 
+      default_action :nothing
+
       #
       # Shell out and use AppleScript to check whether the login item
       # already exists.

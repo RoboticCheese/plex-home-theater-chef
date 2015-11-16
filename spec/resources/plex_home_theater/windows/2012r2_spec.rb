@@ -12,7 +12,7 @@ describe 'resource_plex_home_theater::windows::2012r2' do
       node.set['plex_home_theater']['app']['source'] = source
     end
   end
-  let(:chef_run) { runner.converge("plex_home_theater_test::#{action}") }
+  let(:converge) { runner.converge("plex_home_theater_test::#{action}") }
 
   context 'the default action (:create)' do
     let(:action) { :default }
@@ -34,12 +34,14 @@ describe 'resource_plex_home_theater::windows::2012r2' do
 
     context 'no source attribute' do
       let(:source) { nil }
+      cached(:chef_run) { converge }
 
       it_behaves_like 'any attribute set'
     end
 
     context 'a source attribute' do
       let(:source) { 'http://example.com/plex.exe' }
+      cached(:chef_run) { converge }
 
       it_behaves_like 'any attribute set'
     end
@@ -47,6 +49,7 @@ describe 'resource_plex_home_theater::windows::2012r2' do
 
   context 'the :remove action' do
     let(:action) { :remove }
+    cached(:chef_run) { converge }
 
     it 'stops the Plex Home Theater service' do
       expect(chef_run).to stop_plex_home_theater_service('default')

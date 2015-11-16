@@ -10,12 +10,13 @@ describe 'resource_plex_home_theater_service::windows::2012r2' do
       version: '2012R2'
     )
   end
-  let(:chef_run) do
+  let(:converge) do
     runner.converge("plex_home_theater_service_test::#{action}")
   end
 
   context 'the default action (:nothing)' do
     let(:action) { :default }
+    cached(:chef_run) { converge }
 
     it 'does nothing' do
       expect(chef_run).to_not create_windows_auto_run('Plex Home Theater')
@@ -26,6 +27,7 @@ describe 'resource_plex_home_theater_service::windows::2012r2' do
 
   context 'the :enable action' do
     let(:action) { :enable }
+    cached(:chef_run) { converge }
 
     it 'creates an auto-run item for Plex Home Theater' do
       path = File.expand_path('/Program Files (x86)/Plex Home Theater/' \
@@ -37,6 +39,7 @@ describe 'resource_plex_home_theater_service::windows::2012r2' do
 
   context 'the :disable action' do
     let(:action) { :disable }
+    cached(:chef_run) { converge }
 
     it 'deletes the auto-run item for Plex Home Theater' do
       expect(chef_run).to remove_windows_auto_run('Plex Home Theater')
@@ -58,6 +61,7 @@ describe 'resource_plex_home_theater_service::windows::2012r2' do
 
     context 'not already running' do
       let(:running?) { false }
+      cached(:chef_run) { converge }
 
       it 'starts Plex Home Theater' do
         path = File.expand_path('/Program Files (x86)/Plex Home Theater/' \
@@ -70,6 +74,7 @@ describe 'resource_plex_home_theater_service::windows::2012r2' do
 
     context 'already running' do
       let(:running?) { true }
+      cached(:chef_run) { converge }
 
       it 'does not start Plex Home Theater' do
         expect(chef_run).to_not run_powershell_script('Start Plex Home Theater')
