@@ -1,6 +1,9 @@
 Plex Home Theater Cookbook CHANGELOG
 ====================================
 
+v?.?.? (????-??-??)
+-------------------
+
 v1.0.0 (2015-11-30)
 -------------------
 - Convert to Chef 12.5 custom resources
