@@ -17,7 +17,8 @@ A Chef cookbook for installing Plex Home Theater.
 Requirements
 ============
 
-This cookbook currently requires either OS X or Windows.
+This cookbook now uses the custom resource design pattern only available in
+Chef 12.5 and up. It currently requires either OS X or Windows.
 
 Usage
 =====
@@ -38,12 +39,13 @@ Resources
 
 ***plex_home_theater_app***
 
-Used to install or remove the Plex Home Theater app.
+A platform-agnostic way to install or remove the Plex Home Theater app.
 
 Syntax:
 
     plex_home_theater_app 'default' do
-        action :install
+      source 'https://example.com/plex.package'
+      action :install
     end
 
 Actions:
@@ -52,30 +54,56 @@ Actions:
 |------------|-----------------------------------|
 | `:install` | Install the app                   |
 | `:remove`  | Uninstall the app                 |
+
+Attributes:
+
+| Attribute | Default    | Description                         |
+|-----------|------------|-------------------------------------|
+| source    | `nil`      | An optional package source URL/path |
+| action    | `:install` | Action(s) to perform                |
+
+***plex_home_theater_app_mac_os_x***
+
+OS X implementation of the `plex_home_theater_app` resource.
+
+***plex_home_theater_app_windows***
+
+Windows implementation of the `plex_home_theater_app` resource.
+
+***plex_home_theater_service***
+
+A platform-agnostic way to run Plex or set it to auto-run at login time.
+
+Syntax:
+
+    plex_home_theater_service 'default' do
+      action :nothing
+    end
+
+Actions:
+
+| Action     | Description                       |
+|------------|-----------------------------------|
 | `:enable`  | Set the app to start on login     |
 | `:disable` | Set the app to not start on login |
 | `:start`   | Start the app                     |
+| `:stop`    | Stop the app\*                    |
+
+_\* Currently not supported on Windows platforms_
 
 Attributes:
 
 | Attribute  | Default    | Description          |
 |------------|------------|----------------------|
-| action     | `:install` | Action(s) to perform |
+| action     | `:nothing` | Action(s) to perform |
 
-Providers
-=========
+***plex_home_theater_service_mac_os_x***
 
-***Chef::Provider::PlexHomeTheaterApp::MacOsX***
+OS X implementation of the `plex_home_theater_service` resource.
 
-Provider for Mac OS X platforms.
+***plex_home_theater_service_windows***
 
-***Chef::Provider::PlexHomeTheaterApp::Windows***
-
-Provider for Windows platforms.
-
-***Chef::Provider::PlexHomeTheaterApp***
-
-A parent provider for all the platform-specific providers to subclass.
+Windows implementation of the `plex_home_theater_service` resource.
 
 Contributing
 ============
