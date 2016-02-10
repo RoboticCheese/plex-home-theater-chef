@@ -27,8 +27,8 @@ class Chef
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterAppMacOsX < PlexHomeTheaterApp
-      URL ||= 'https://plex.tv/downloads'
-      PATH ||= '/Applications/Plex Home Theater.app'
+      URL ||= 'https://plex.tv/downloads'.freeze
+      PATH ||= '/Applications/Plex Home Theater.app'.freeze
 
       provides :plex_home_theater_app, platform_family: 'mac_os_x'
 

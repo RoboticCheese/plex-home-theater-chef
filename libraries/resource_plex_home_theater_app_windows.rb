@@ -27,8 +27,9 @@ class Chef
     #
     # @author Jonathan Hartman <j@p4nt5.com>
     class PlexHomeTheaterAppWindows < PlexHomeTheaterApp
-      URL ||= 'https://plex.tv/downloads'
+      URL ||= 'https://plex.tv/downloads'.freeze
       PATH ||= ::File.expand_path('/Program Files (x86)/Plex Home Theater')
+                     .freeze
 
       provides :plex_home_theater_app, platform_family: 'windows'
 

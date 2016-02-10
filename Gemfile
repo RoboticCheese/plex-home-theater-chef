@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 group :test do
   gem 'rake'
   gem 'rubocop'
-  gem 'foodcritic'
+  gem 'foodcritic', '~> 6.0'
   gem 'rspec'
   gem 'chefspec'
   gem 'simplecov'
@@ -20,7 +20,6 @@ end
 
 group :integration do
   gem 'serverspec'
-  gem 'cucumber'
 end
 
 group :deploy do

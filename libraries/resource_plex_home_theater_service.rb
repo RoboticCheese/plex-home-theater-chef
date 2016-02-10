@@ -28,8 +28,10 @@ class Chef
     class PlexHomeTheaterService < Resource
       %i(enable disable start stop).each do |a|
         action a do
-          fail(NotImplementedError,
-               "Action '#{a}' must be implemented for '#{self.class}' resource")
+          raise(
+            NotImplementedError,
+            "Action '#{a}' must be implemented for '#{self.class}' resource"
+          )
         end
       end
 

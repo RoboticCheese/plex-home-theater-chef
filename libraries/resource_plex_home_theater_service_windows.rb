@@ -62,7 +62,7 @@ class Chef
             cmd = 'Get-Process \"Plex Home Theater\" -ErrorAction ' \
                   'SilentlyContinue'
             Mixlib::ShellOut.new("powershell -c \"#{cmd}\"").run_command
-              .stdout.empty?
+                            .stdout.empty?
           end
         end
       end
