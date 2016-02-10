@@ -1,6 +1,5 @@
 # Encoding: UTF-8
-#
-# rubocop:disable SingleSpaceBeforeFirstArg
+
 name             'plex-home-theater'
 maintainer       'Jonathan Hartman'
 maintainer_email 'j@p4nt5.com'
@@ -13,4 +12,3 @@ depends          'windows', '~> 1.37'
 
 supports         'mac_os_x'
 supports         'windows'
-# rubocop:enable SingleSpaceBeforeFirstArg
